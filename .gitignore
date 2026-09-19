@@ -1,0 +1,5 @@
+*.msix
+*.zip
+app/
+extracted/
+notes.md

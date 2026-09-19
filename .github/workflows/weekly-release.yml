@@ -1,0 +1,67 @@
+name: Weekly release check
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # every Monday 02:00 UTC (10:00 Beijing)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect version and publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARCH: x64
+        run: |
+          set -euo pipefail
+
+          URL="https://persistent.oaistatic.com/codex-app-prod/ChatGPT-${ARCH}.msix"
+          echo "Downloading ${URL}"
+          curl -sL -o app.msix "$URL"
+          ls -lh app.msix
+
+          # MSIX is a ZIP container; read the package version from its manifest
+          VERSION=$(bsdtar -xOf app.msix AppxManifest.xml \
+            | grep -o '<Identity[^>]*Version="[^"]*"' \
+            | sed 's/.*Version="\([^"]*\)".*/\1/')
+          echo "Detected version: ${VERSION}"
+          test -n "${VERSION}"
+
+          # Skip if this version was already released
+          if git ls-remote --tags origin | grep -q "refs/tags/v${VERSION}"; then
+            echo "v${VERSION} already released - nothing to do."
+            exit 0
+          fi
+
+          # Extract the app folder and build the portable zip
+          bsdtar -xf app.msix app
+          mv app "ChatGPT-Codex"
+          bsdtar -a -cf "ChatGPT-Codex-win-${ARCH}-portable.zip" "ChatGPT-Codex"
+          ls -lh "ChatGPT-Codex-win-${ARCH}-portable.zip"
+
+          cat > notes.md <<'EOF'
+          Portable build of the official ChatGPT (Codex) desktop app.
+
+          **Usage**: download `ChatGPT-Codex-win-x64-portable.zip`, extract, run `ChatGPT-Codex\ChatGPT.exe`.
+          Works on Windows builds below the official minimum (tested on build 17763 / 1809) — no install, no admin, no Store needed.
+
+          `ChatGPT-x64.msix` is the original, unmodified package from OpenAI's CDN.
+
+          App data lives in `%LOCALAPPDATA%\Codex`, so replacing the folder does not affect your login.
+
+          > Unofficial, unmodified redistribution of OpenAI's official package for systems the official installer refuses. All binaries © OpenAI. See README for details.
+          EOF
+
+          gh release create "v${VERSION}" \
+            --title "ChatGPT (Codex) desktop v${VERSION} - portable" \
+            --notes-file notes.md \
+            "ChatGPT-Codex-win-${ARCH}-portable.zip" \
+            "app.msix#ChatGPT-${ARCH}.msix"
+
+          echo "Published v${VERSION}"
