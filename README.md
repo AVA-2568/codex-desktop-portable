@@ -1,6 +1,6 @@
 # Codex / ChatGPT Desktop — Portable for Older Windows
 
-Unofficial **portable packages** of the official OpenAI **ChatGPT (Codex) desktop app for Windows**, for machines that fail the official installer's OS check — for example **Windows 10 LTSC 2019 (build 17763 / 1809)**.
+Unofficial **portable packages** of the official OpenAI **ChatGPT (Codex) desktop app for Windows**, for machines that fail the official installer's OS check — for example **Windows 10 LTSC 2019 (build 17763 / 1809)**. No Microsoft Store, no winget, no admin rights, no install.
 
 > The official MSIX declares `MinVersion 10.0.19041`, so Microsoft Store / `Add-AppxPackage` refuse to install on older builds with error `0x80073CFD` ("prerequisites not met"). In practice the app itself runs on older builds — the version gate lives in the installer metadata, not in the app. This project removes exactly that barrier by extracting the **unmodified** app from the **official** package. Tested working on Windows 10 build 17763.
 
@@ -41,15 +41,15 @@ An MSIX is a ZIP archive signed by OpenAI/Microsoft. Extracting it needs no admi
 
 A scheduled GitHub Actions workflow checks OpenAI's CDN **every Monday**; when the version on the CDN differs from the latest release here, it extracts, packages, and publishes a new release automatically. You can also trigger it manually: **Actions → Weekly release check → Run workflow**.
 
-**Versioning** — release tags mirror the **official in-app version** (read from `version` in `resources/app.asar` → `package.json`, the same number the app reports at runtime). Note that the MSIX *container* version declared in `AppxManifest.xml` (e.g. `26.915.4065.0`) is a different, packaging-side number and is intentionally not used as the release tag.
-
-**Retention** — only the **3 most recent releases** are kept. After every run, older releases (and their tags) are pruned automatically.
+Release tags mirror the **official in-app version**: the `version` field in `resources/app.asar` → `package.json`, which is the same number the app reports at runtime. The MSIX container version in `AppxManifest.xml` (e.g. `26.915.4065.0`) is a separate packaging-side number and is not used for release tags. To keep the release list short, every run also deletes older releases and their tags, so only the **3 most recent releases** remain.
 
 ## Updating
 
-- Re-run `build.ps1` — it always installs the newest version from OpenAI's CDN.
-- Or download the latest portable zip from the [latest release](../../releases/latest) and replace the app folder.
-- Alternatively, updates can be applied with [**CC Switch**](https://github.com/farion1231/cc-switch).
+The app does not update itself (see [Limitations](#limitations)). Three ways to get a newer version:
+
+1. Re-run `.\build.ps1` — it always installs the newest version from OpenAI's CDN.
+2. Download the latest portable zip from the [latest release](../../releases/latest) and replace the app folder.
+3. Use [CC Switch](https://github.com/farion1231/cc-switch) to apply the update.
 
 ## App data
 
@@ -57,20 +57,33 @@ App data lives in `%LOCALAPPDATA%\Codex` — outside the app folder — so repla
 
 ## Limitations
 
-- **No auto-update**: the official updater only works inside the MSIX install. Re-run `build.ps1`, grab a newer release, or use CC Switch to update (see [Updating](#updating)).
+- **No auto-update**: the official updater only works inside the MSIX install. Use one of the update paths in [Updating](#updating).
 - This is the desktop **app**. The Codex CLI (`npm i -g @openai/codex`) is a separate product with different system requirements.
+
+## FAQ
+
+**Does the ChatGPT (Codex) desktop app really run on Windows 10 LTSC 2019?**
+Yes. The app itself runs on build 17763 (1809); only the official installer refuses to install there.
+
+**Is this the official app?**
+Yes. The binaries come straight from the official MSIX and run unmodified. This project only downloads, extracts, and packages them.
+
+**Why does installation fail with error `0x80073CFD`?**
+The official MSIX requires Windows build 19041 or newer. That is exactly the case this project exists for: extract the app instead of installing it.
+
+**Where is my login stored?**
+In `%LOCALAPPDATA%\Codex`, outside the app folder. See [App data](#app-data).
 
 ## 中文说明
 
-本项目为 **OpenAI ChatGPT（Codex）Windows 桌面应用**的非官方便携包，用于绕过官方安装包的最低系统版本检查（`MinVersion 10.0.19041`），让 **Windows 10 LTSC 2019（build 17763 / 1809）** 等旧版本系统也能使用。
+本项目为 **OpenAI ChatGPT（Codex）Windows 桌面应用**的非官方便携包，用于绕过官方安装包的最低系统版本检查（`MinVersion 10.0.19041`），让 **Windows 10 LTSC 2019（build 17763 / 1809）** 等旧版本系统也能使用。无需 Microsoft Store、无需 winget、无需管理员权限。
 
 - 官方 MSIX 要求 build ≥ 19041，否则安装报 `0x80073CFD`；但应用本体实际可在 1809 上正常运行（已实测）
 - 原理：MSIX 本质是签名的 ZIP 容器，解包后直接运行 `app\ChatGPT.exe`，不做任何修改、不重新签名、无需管理员权限
 - 用法：下载 Release 中的 `ChatGPT-Codex-win-x64-portable.zip` 解压运行；或在 Windows 上运行 `.\build.ps1` 一键完成"下载官方包 → 解包 → 创建桌面快捷方式"
-- 每周一自动检查 OpenAI CDN 新版本并自动发布 Release
-- **版本对齐**：Release 版本号与官方应用内版本一致（取自应用包内 `resources/app.asar` → `package.json` 的 `version`，即应用自身运行时报告的版本号）。MSIX 容器版本（`AppxManifest.xml` 中的版本，如 `26.915.4065.0`）是打包侧的另一个编号，不作为发布版本号
-- **保留策略**：仅保留最近 **3** 个 Release，更早的版本（含对应 tag）在每次运行后自动清理
-- **更新方式**：重新运行 `.\build.ps1`、下载最新 Release 替换应用目录，或使用 [**CC Switch**](https://github.com/farion1231/cc-switch) 更新
+- 每周一自动检查 OpenAI CDN 新版本并自动发布 Release。Release 版本号与官方应用内版本一致（取自应用包内 `package.json` 的 `version`，即应用自身报告的版本号）；`AppxManifest.xml` 里的 MSIX 容器版本是打包侧的另一个编号（如 `26.915.4065.0`），不用于发布版本号
+- 仅保留最近 3 个 Release，更早的版本（含对应 tag）在每次运行后自动清理
+- 更新方式：重新运行 `.\build.ps1`、下载最新 Release 替换应用目录，或使用 [CC Switch](https://github.com/farion1231/cc-switch) 更新
 - 应用数据存于 `%LOCALAPPDATA%\Codex`，更新替换不影响登录状态
 
 ## Disclaimer
