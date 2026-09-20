@@ -14,6 +14,35 @@ param(
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 
+# Read the official app version ("version" in package.json inside app.asar) -
+# the same number the app reports at runtime. Best effort: failure to read it
+# never blocks the install.
+function Read-AppVersionFromAsar {
+    param([string]$AsarPath)
+    $fs = [IO.File]::OpenRead($AsarPath)
+    try {
+        $br = New-Object IO.BinaryReader($fs)
+        [void]$br.ReadBytes(4)             # pickle framing
+        $headerTotal = $br.ReadUInt32()    # asar header total size
+        [void]$br.ReadUInt32()             # header payload size
+        $jsonLen = $br.ReadUInt32()        # JSON index length
+        # Parse the full index and take the TOP-LEVEL package.json entry
+        # (subdirectory files share the name but are not the app manifest).
+        # PS 5.1's built-in ConvertFrom-Json caps input at 2 MB; this index
+        # is ~4 MB, so use JavaScriptSerializer with the limit lifted.
+        Add-Type -AssemblyName System.Web.Extensions | Out-Null
+        $ser = New-Object Web.Script.Serialization.JavaScriptSerializer
+        $ser.MaxJsonLength = [int]::MaxValue
+        $index = $ser.DeserializeObject([Text.Encoding]::UTF8.GetString($br.ReadBytes([int]$jsonLen)))
+        $entry = $index['files']['package.json']
+        if (-not $entry) { return $null }
+        $fs.Position = 8 + $headerTotal + [int64]$entry['offset']
+        $pkg = $ser.DeserializeObject([Text.Encoding]::UTF8.GetString($br.ReadBytes([int]$entry['size'])))
+        return $pkg['version']
+    }
+    finally { $fs.Dispose() }
+}
+
 $url = "https://persistent.oaistatic.com/codex-app-prod/ChatGPT-$Arch.msix"
 $tmp = Join-Path $env:TEMP ("codex-msix-" + [guid]::NewGuid().ToString('N').Substring(0, 8))
 
@@ -32,6 +61,12 @@ if ($LASTEXITCODE -ne 0) { throw "Extraction failed" }
 Write-Host "[3/4] Installing to $Destination"
 New-Item -ItemType Directory -Force $Destination | Out-Null
 Copy-Item (Join-Path $tmp 'app\*') $Destination -Recurse -Force
+
+$appVersion = $null
+try { $appVersion = Read-AppVersionFromAsar (Join-Path $tmp 'app\resources\app.asar') } catch { $appVersion = $null }
+if ($appVersion) {
+    Write-Host "      Official app version: $appVersion"
+}
 Remove-Item $tmp -Recurse -Force
 
 if (-not $NoShortcut) {

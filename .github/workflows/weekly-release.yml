@@ -8,6 +8,9 @@ on:
 permissions:
   contents: write
 
+env:
+  KEEP_RELEASES: '3'
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -26,14 +29,16 @@ jobs:
 
           URL="https://persistent.oaistatic.com/codex-app-prod/ChatGPT-${ARCH}.msix"
           echo "Downloading ${URL}"
-          curl -sL -o app.msix "$URL"
-          ls -lh app.msix
+          curl -sL -o "ChatGPT-${ARCH}.msix" "$URL"
+          ls -lh "ChatGPT-${ARCH}.msix"
 
-          # MSIX is a ZIP container; read the package version from its manifest
-          VERSION=$(bsdtar -xOf app.msix AppxManifest.xml \
-            | grep -o '<Identity[^>]*Version="[^"]*"' \
-            | sed 's/.*Version="\([^"]*\)".*/\1/')
-          echo "Detected version: ${VERSION}"
+          # Release version = the official IN-APP version: "version" in
+          # resources/app.asar -> package.json, i.e. what the app reports at
+          # runtime (Electron app.getVersion()). The MSIX container version in
+          # AppxManifest.xml is a different, packaging-side number.
+          bsdtar -xf "ChatGPT-${ARCH}.msix" "app/resources/app.asar"
+          VERSION=$(python3 scripts/get_app_version.py "app/resources/app.asar")
+          echo "Detected app version: ${VERSION}"
           test -n "${VERSION}"
 
           # Skip if this version was already released
@@ -43,28 +48,54 @@ jobs:
           fi
 
           # Extract the app folder and build the portable zip
-          bsdtar -xf app.msix app
+          bsdtar -xf "ChatGPT-${ARCH}.msix" app
           mv app "ChatGPT-Codex"
           bsdtar -a -cf "ChatGPT-Codex-win-${ARCH}-portable.zip" "ChatGPT-Codex"
           ls -lh "ChatGPT-Codex-win-${ARCH}-portable.zip"
 
-          cat > notes.md <<'EOF'
-          Portable build of the official ChatGPT (Codex) desktop app.
-
+          {
+            echo "Portable build of the official ChatGPT (Codex) desktop app, app version **${VERSION}**."
+            echo ""
+            echo "The tag mirrors the official in-app version - the one the app itself reports."
+            echo ""
+            cat <<'EOF'
           **Usage**: download `ChatGPT-Codex-win-x64-portable.zip`, extract, run `ChatGPT-Codex\ChatGPT.exe`.
           Works on Windows builds below the official minimum (tested on build 17763 / 1809) — no install, no admin, no Store needed.
-
-          `ChatGPT-x64.msix` is the original, unmodified package from OpenAI's CDN.
-
+          EOF
+            echo ""
+            echo "\`ChatGPT-${ARCH}.msix\` is the original, unmodified package from OpenAI's CDN."
+            echo ""
+            cat <<'EOF'
           App data lives in `%LOCALAPPDATA%\Codex`, so replacing the folder does not affect your login.
 
           > Unofficial, unmodified redistribution of OpenAI's official package for systems the official installer refuses. All binaries © OpenAI. See README for details.
           EOF
+          } > notes.md
 
           gh release create "v${VERSION}" \
             --title "ChatGPT (Codex) desktop v${VERSION} - portable" \
             --notes-file notes.md \
             "ChatGPT-Codex-win-${ARCH}-portable.zip" \
-            "app.msix#ChatGPT-${ARCH}.msix"
+            "ChatGPT-${ARCH}.msix"
 
           echo "Published v${VERSION}"
+
+      - name: Prune old releases (keep latest 3)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          KEEP="${KEEP_RELEASES:-3}"
+          OLD_TAGS=$(gh release list --limit 200 --json tagName,createdAt \
+            --jq "sort_by(.createdAt) | reverse | .[${KEEP}:][].tagName")
+
+          if [ -z "${OLD_TAGS}" ]; then
+            echo "Nothing to prune (${KEEP} most recent releases kept)."
+            exit 0
+          fi
+
+          for TAG in ${OLD_TAGS}; do
+            echo "Deleting old release ${TAG} (keeping ${KEEP} most recent)"
+            gh release delete "${TAG}" --yes --cleanup-tag
+          done
