@@ -37,9 +37,9 @@ official MSIX (signed ZIP container) ──extract──▶ app\ ──▶ run C
 
 An MSIX is a ZIP archive signed by OpenAI/Microsoft. Extracting it needs no admin rights, no modification, and no repacking — the app simply runs without the package-identity checks that the installer enforces.
 
-## Weekly automation
+## Scheduled automation
 
-A scheduled GitHub Actions workflow checks OpenAI's CDN **every Monday**; when the version on the CDN differs from the latest release here, it extracts, packages, and publishes a new release automatically. You can also trigger it manually: **Actions → Weekly release check → Run workflow**.
+A scheduled GitHub Actions workflow checks OpenAI's CDN on **Monday, Wednesday, and Friday** (02:00 UTC); when the version on the CDN differs from the latest release here, it extracts, packages, and publishes a new release automatically. You can also trigger it manually: **Actions → Scheduled release check → Run workflow**.
 
 Release tags mirror the **official in-app version**: the `version` field in `resources/app.asar` → `package.json`, which is the same number the app reports at runtime. The MSIX container version in `AppxManifest.xml` (e.g. `26.915.4065.0`) is a separate packaging-side number and is not used for release tags. To keep the release list short, every run also deletes older releases and their tags, so only the **3 most recent releases** remain.
 
@@ -81,7 +81,7 @@ In `%LOCALAPPDATA%\Codex`, outside the app folder. See [App data](#app-data).
 - 官方 MSIX 要求 build ≥ 19041，否则安装报 `0x80073CFD`；但应用本体实际可在 1809 上正常运行（已实测）
 - 原理：MSIX 本质是签名的 ZIP 容器，解包后直接运行 `app\ChatGPT.exe`，不做任何修改、不重新签名、无需管理员权限
 - 用法：下载 Release 中的 `ChatGPT-Codex-win-x64-portable.zip` 解压运行；或在 Windows 上运行 `.\build.ps1` 一键完成"下载官方包 → 解包 → 创建桌面快捷方式"
-- 每周一自动检查 OpenAI CDN 新版本并自动发布 Release。Release 版本号与官方应用内版本一致（取自应用包内 `package.json` 的 `version`，即应用自身报告的版本号）；`AppxManifest.xml` 里的 MSIX 容器版本是打包侧的另一个编号（如 `26.915.4065.0`），不用于发布版本号
+- 每逢周一、周三、周五（UTC 02:00 / 北京时间 10:00）自动检查 OpenAI CDN 新版本并自动发布 Release。Release 版本号与官方应用内版本一致（取自应用包内 `package.json` 的 `version`，即应用自身报告的版本号）；`AppxManifest.xml` 里的 MSIX 容器版本是打包侧的另一个编号（如 `26.915.4065.0`），不用于发布版本号
 - 仅保留最近 3 个 Release，更早的版本（含对应 tag）在每次运行后自动清理
 - 更新方式：重新运行 `.\build.ps1`、下载最新 Release 替换应用目录，或使用 [CC Switch](https://github.com/farion1231/cc-switch) 更新
 - 应用数据存于 `%LOCALAPPDATA%\Codex`，更新替换不影响登录状态

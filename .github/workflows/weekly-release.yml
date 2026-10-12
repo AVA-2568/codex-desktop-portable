@@ -1,8 +1,8 @@
-name: Weekly release check
+name: Scheduled release check
 
 on:
   schedule:
-    - cron: '0 2 * * 1' # every Monday 02:00 UTC (10:00 Beijing)
+    - cron: '0 2 * * 1,3,5' # Mon, Wed, Fri 02:00 UTC (10:00 Beijing)
   workflow_dispatch:
 
 permissions:
@@ -87,8 +87,8 @@ jobs:
           set -euo pipefail
 
           KEEP="${KEEP_RELEASES:-3}"
-          OLD_TAGS=$(gh release list --limit 200 --json tagName,createdAt \
-            --jq "sort_by(.createdAt) | reverse | .[${KEEP}:][].tagName")
+          OLD_TAGS=$(gh release list --limit 200 --json tagName \
+            --jq ".[${KEEP}:][].tagName")
 
           if [ -z "${OLD_TAGS}" ]; then
             echo "Nothing to prune (${KEEP} most recent releases kept)."
