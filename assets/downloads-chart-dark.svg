@@ -11,6 +11,8 @@
 <text x="54" y="112.5" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">90</text>
 <line x1="66" y1="58.0" x2="830" y2="58.0" stroke="#21262d" stroke-width="1"/>
 <text x="54" y="58.0" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">120</text>
+<line x1="66" y1="72.5" x2="448.0" y2="72.5" stroke="#2f81f7" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>
+<text x="448.0" y="177.9" fill="#8b949e" font-size="12" text-anchor="middle" opacity="0.85">First sample — one point is added every day at 03:17 UTC</text>
 <circle cx="448.0" cy="72.5" r="5" fill="#2f81f7" stroke="#0d1117" stroke-width="2"/>
 <line x1="66" y1="276.0" x2="830" y2="276.0" stroke="#30363d" stroke-width="1"/>
 <text x="448.0" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-24</text>

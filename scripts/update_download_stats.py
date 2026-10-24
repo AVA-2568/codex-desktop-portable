@@ -278,6 +278,14 @@ def render_svg(history: dict, pal: dict, out_path: str) -> None:
 
     # -- latest marker ------------------------------------------------------
     lx, ly = pts[-1]
+    if n == 1:
+        # a lone dot reads as a broken chart -- anchor it to the axis and
+        # explain what the visitor is looking at
+        add(f'<line x1="{x0}" y1="{ly:.1f}" x2="{lx:.1f}" y2="{ly:.1f}" stroke="{pal["line"]}" '
+            f'stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45"/>')
+        add(f'<text x="{(x0 + x1) / 2:.1f}" y="{y0 + (y1 - y0) * 0.55:.1f}" fill="{pal["muted"]}" '
+            f'font-size="12" text-anchor="middle" opacity="0.85">'
+            f'First sample — one point is added every day at 03:17 UTC</text>')
     add(f'<circle cx="{lx:.1f}" cy="{ly:.1f}" r="5" fill="{pal["line"]}" stroke="{pal["dot_stroke"]}" stroke-width="2"/>')
 
     # -- baseline -----------------------------------------------------------
