@@ -166,6 +166,22 @@ def update_history(history: dict, releases: list[dict], repo: str, now: datetime
     return history
 
 
+def same_payload(a: dict, b: dict) -> bool:
+    """True when two histories are identical apart from the sampling timestamp.
+
+    `updated_at` moves on every run, so comparing it directly would produce a
+    commit per run even when no download count actually changed -- and manual
+    reruns would clutter the history. It is therefore excluded from the diff,
+    which also makes `updated_at` mean "last time the data changed".
+    """
+    def norm(d: dict) -> dict:
+        d = json.loads(json.dumps(d))
+        d.pop("updated_at", None)
+        return d
+
+    return norm(a) == norm(b)
+
+
 def save_json(path: str, data: dict) -> None:
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
@@ -339,10 +355,15 @@ def main(argv: list[str] | None = None) -> int:
         except urllib.error.URLError as exc:
             print(f"error: cannot reach GitHub API: {exc.reason}", file=sys.stderr)
             return 1
+        before = json.loads(json.dumps(history))
         history = update_history(history, releases, args.repo, now)
-        save_json(history_path, history)
-        live = sum(1 for e in history["releases"].values() if not e.get("retired"))
-        print(f"{len(releases)} live release(s), {live} tracked tag(s), total {history['snapshots'][-1]['total']}")
+        snap = history["snapshots"][-1]
+        if same_payload(before, history):
+            print(f"{len(releases)} live release(s), total {snap['total']} - unchanged since last run, history left untouched")
+        else:
+            save_json(history_path, history)
+            live = sum(1 for e in history["releases"].values() if not e.get("retired"))
+            print(f"{len(releases)} live release(s), {live} tracked tag(s), total {snap['total']} (+{snap['delta'] or 0})")
 
     render_svg(history, LIGHT, os.path.join(args.assets_dir, "downloads-chart.svg"))
     render_svg(history, DARK, os.path.join(args.assets_dir, "downloads-chart-dark.svg"))

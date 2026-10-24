@@ -59,11 +59,10 @@ Release tags mirror the **official in-app version**: the `version` field in `res
 
 ## Updating
 
-The app does not update itself (see [Limitations](#limitations)). Three ways to get a newer version:
+The app does not update itself (see [Limitations](#limitations)). Two ways to get a newer version:
 
 1. Re-run `.\build.ps1` — it always installs the newest version from OpenAI's CDN.
 2. Download the latest portable zip from the [latest release](../../releases/latest) and replace the app folder.
-3. Use [CC Switch](https://github.com/farion1231/cc-switch) to apply the update.
 
 ## App data
 
@@ -98,7 +97,7 @@ In `%LOCALAPPDATA%\Codex`, outside the app folder. See [App data](#app-data).
 - 每逢周一、周三、周五（UTC 02:00 / 北京时间 10:00）自动检查 OpenAI CDN 新版本并自动发布 Release。Release 版本号与官方应用内版本一致（取自应用包内 `package.json` 的 `version`，即应用自身报告的版本号）；`AppxManifest.xml` 里的 MSIX 容器版本是打包侧的另一个编号（如 `26.915.4065.0`），不用于发布版本号
 - 仅保留最近 3 个 Release，更早的版本（含对应 tag）在每次运行后自动清理
 - 下载量统计：Release 下载趋势每日 UTC 03:17 自动采样并提交为 `assets/downloads-history.json`，图表见 [Download stats](#download-stats)；已清理的旧版本保留最后一次采样值，因此总量不会因删除 Release 而下降
-- 更新方式：重新运行 `.\build.ps1`、下载最新 Release 替换应用目录，或使用 [CC Switch](https://github.com/farion1231/cc-switch) 更新
+- 更新方式：重新运行 `.\build.ps1`，或下载最新 Release 替换应用目录
 - 应用数据存于 `%LOCALAPPDATA%\Codex`，更新替换不影响登录状态
 
 ## Disclaimer
