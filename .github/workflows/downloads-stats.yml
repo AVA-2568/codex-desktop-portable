@@ -1,0 +1,44 @@
+name: Download stats
+
+# GitHub exposes download_count only as a *current* cumulative value per
+# release asset - there is no history API. This workflow samples it once a day,
+# appends the sample to assets/downloads-history.json and re-renders the chart
+# used in the README. Keep this running: every gap is a gap in the graph.
+
+on:
+  schedule:
+    - cron: '17 3 * * *' # daily 03:17 UTC (11:17 Beijing)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: download-stats
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect download counts and render chart
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/update_download_stats.py --repo "${{ github.repository }}"
+
+      - name: Commit changes
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/downloads-history.json \
+                  assets/downloads-chart.svg \
+                  assets/downloads-chart-dark.svg
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update download stats [skip ci]"
+          git push origin "HEAD:${{ github.ref_name }}"

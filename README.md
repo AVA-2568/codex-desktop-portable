@@ -11,6 +11,20 @@ Unofficial **portable packages** of the official OpenAI **ChatGPT (Codex) deskto
 | `ChatGPT-Codex-win-x64-portable.zip` | The extracted app folder. Unzip anywhere → run `ChatGPT-Codex\ChatGPT.exe` |
 | `ChatGPT-x64.msix` | The **original, untouched** MSIX downloaded from OpenAI's CDN |
 
+## Download stats
+
+[![total downloads](https://img.shields.io/github/downloads/AVA-2568/codex-desktop-portable/total?color=0969da&label=downloads)](../../releases)
+[![latest release downloads](https://img.shields.io/github/downloads/AVA-2568/codex-desktop-portable/latest/total?color=0969da&label=latest%20release)](../../releases/latest)
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/downloads-chart-dark.svg">
+  <img alt="Total release downloads over time" src="assets/downloads-chart.svg">
+</picture>
+
+Counts are sampled once a day by the [`Download stats`](.github/workflows/downloads-stats.yml) workflow and committed to [`assets/downloads-history.json`](assets/downloads-history.json). GitHub only exposes a *current* cumulative `download_count` per asset — never a history — so the curve starts on the day sampling began.
+
+Every release run keeps only the 3 most recent releases. When a release is pruned, its count is frozen at the last sampled value, so the total reflects **everything ever downloaded** and never drops when old releases are deleted. The trade-off: downloads of a pruned release after its final sample can no longer be observed.
+
 ## Quick start
 
 1. Download `ChatGPT-Codex-win-x64-portable.zip` from the [latest release](../../releases/latest)
@@ -83,6 +97,7 @@ In `%LOCALAPPDATA%\Codex`, outside the app folder. See [App data](#app-data).
 - 用法：下载 Release 中的 `ChatGPT-Codex-win-x64-portable.zip` 解压运行；或在 Windows 上运行 `.\build.ps1` 一键完成"下载官方包 → 解包 → 创建桌面快捷方式"
 - 每逢周一、周三、周五（UTC 02:00 / 北京时间 10:00）自动检查 OpenAI CDN 新版本并自动发布 Release。Release 版本号与官方应用内版本一致（取自应用包内 `package.json` 的 `version`，即应用自身报告的版本号）；`AppxManifest.xml` 里的 MSIX 容器版本是打包侧的另一个编号（如 `26.915.4065.0`），不用于发布版本号
 - 仅保留最近 3 个 Release，更早的版本（含对应 tag）在每次运行后自动清理
+- 下载量统计：Release 下载趋势每日 UTC 03:17 自动采样并提交为 `assets/downloads-history.json`，图表见 [Download stats](#download-stats)；已清理的旧版本保留最后一次采样值，因此总量不会因删除 Release 而下降
 - 更新方式：重新运行 `.\build.ps1`、下载最新 Release 替换应用目录，或使用 [CC Switch](https://github.com/farion1231/cc-switch) 更新
 - 应用数据存于 `%LOCALAPPDATA%\Codex`，更新替换不影响登录状态
 

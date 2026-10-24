@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" role="img" aria-label="Total release downloads over time">
+<defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0969da" stop-opacity="0.20"/><stop offset="100%" stop-color="#0969da" stop-opacity="0"/></linearGradient></defs>
+<g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif">
+<line x1="66" y1="276.0" x2="830" y2="276.0" stroke="#eaeef2" stroke-width="1"/>
+<text x="54" y="276.0" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">0</text>
+<line x1="66" y1="221.5" x2="830" y2="221.5" stroke="#eaeef2" stroke-width="1"/>
+<text x="54" y="221.5" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">30</text>
+<line x1="66" y1="167.0" x2="830" y2="167.0" stroke="#eaeef2" stroke-width="1"/>
+<text x="54" y="167.0" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">60</text>
+<line x1="66" y1="112.5" x2="830" y2="112.5" stroke="#eaeef2" stroke-width="1"/>
+<text x="54" y="112.5" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">90</text>
+<line x1="66" y1="58.0" x2="830" y2="58.0" stroke="#eaeef2" stroke-width="1"/>
+<text x="54" y="58.0" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">120</text>
+<circle cx="448.0" cy="72.5" r="5" fill="#0969da" stroke="#ffffff" stroke-width="2"/>
+<text x="448.0" y="298" fill="#656d76" font-size="11" text-anchor="middle">10-24</text>
+<text x="66" y="28" fill="#656d76" font-size="13">Total release downloads</text>
+<text x="830" y="34" fill="#1f2328" font-size="26" font-weight="600" text-anchor="end">112</text>
+<text x="66" y="298" fill="#656d76" font-size="10" opacity="0.85">tracking started 2026-10-24</text>
+</g></svg>

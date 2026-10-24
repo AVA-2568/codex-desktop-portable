@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "releases": {
+    "v26.1016.62342": {
+      "published_at": "2026-10-23T07:03:34Z",
+      "downloads": 8,
+      "last_seen": "2026-10-24",
+      "retired": false
+    },
+    "v26.1013.40934": {
+      "published_at": "2026-10-19T07:24:14Z",
+      "downloads": 74,
+      "last_seen": "2026-10-24",
+      "retired": false
+    },
+    "v26.1007.71326": {
+      "published_at": "2026-10-16T06:48:42Z",
+      "downloads": 30,
+      "last_seen": "2026-10-24",
+      "retired": false
+    }
+  },
+  "snapshots": [
+    {
+      "date": "2026-10-24",
+      "total": 112,
+      "delta": null,
+      "by_tag": {
+        "v26.1016.62342": 8,
+        "v26.1013.40934": 74,
+        "v26.1007.71326": 30
+      }
+    }
+  ],
+  "repo": "AVA-2568/codex-desktop-portable",
+  "updated_at": "2026-10-24T10:16:05Z",
+  "first_snapshot": "2026-10-24"
+}
