@@ -4,28 +4,30 @@
 <line x1="66" y1="276.0" x2="830" y2="276.0" stroke="#21262d" stroke-width="1"/>
 <text x="54" y="276.0" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">0</text>
 <line x1="66" y1="221.5" x2="830" y2="221.5" stroke="#21262d" stroke-width="1"/>
-<text x="54" y="221.5" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">60</text>
+<text x="54" y="221.5" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">80</text>
 <line x1="66" y1="167.0" x2="830" y2="167.0" stroke="#21262d" stroke-width="1"/>
-<text x="54" y="167.0" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">120</text>
+<text x="54" y="167.0" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">160</text>
 <line x1="66" y1="112.5" x2="830" y2="112.5" stroke="#21262d" stroke-width="1"/>
-<text x="54" y="112.5" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">180</text>
+<text x="54" y="112.5" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">240</text>
 <line x1="66" y1="58.0" x2="830" y2="58.0" stroke="#21262d" stroke-width="1"/>
-<text x="54" y="58.0" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">240</text>
-<path d="M 66.0 276.0 L 66.0 174.3 L 218.8 167.0 L 371.6 154.3 L 524.4 139.8 L 677.2 114.3 L 830.0 72.5 L 830.0 276.0 Z" fill="url(#fill)" stroke="none"/>
-<path d="M 66.0 174.3 L 218.8 167.0 L 371.6 154.3 L 524.4 139.8 L 677.2 114.3 L 830.0 72.5" fill="none" stroke="#2f81f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="66.0" cy="174.3" r="2.6" fill="#2f81f7"/>
-<circle cx="218.8" cy="167.0" r="2.6" fill="#2f81f7"/>
-<circle cx="371.6" cy="154.3" r="2.6" fill="#2f81f7"/>
-<circle cx="524.4" cy="139.8" r="2.6" fill="#2f81f7"/>
-<circle cx="677.2" cy="114.3" r="2.6" fill="#2f81f7"/>
-<circle cx="830.0" cy="72.5" r="5" fill="#2f81f7" stroke="#0d1117" stroke-width="2"/>
+<text x="54" y="58.0" fill="#8b949e" font-size="11" text-anchor="end" dominant-baseline="middle">320</text>
+<path d="M 66.0 276.0 L 66.0 199.7 L 193.3 194.2 L 320.7 184.7 L 448.0 173.8 L 575.3 154.7 L 702.7 123.4 L 830.0 99.6 L 830.0 276.0 Z" fill="url(#fill)" stroke="none"/>
+<path d="M 66.0 199.7 L 193.3 194.2 L 320.7 184.7 L 448.0 173.8 L 575.3 154.7 L 702.7 123.4 L 830.0 99.6" fill="none" stroke="#2f81f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="66.0" cy="199.7" r="2.6" fill="#2f81f7"/>
+<circle cx="193.3" cy="194.2" r="2.6" fill="#2f81f7"/>
+<circle cx="320.7" cy="184.7" r="2.6" fill="#2f81f7"/>
+<circle cx="448.0" cy="173.8" r="2.6" fill="#2f81f7"/>
+<circle cx="575.3" cy="154.7" r="2.6" fill="#2f81f7"/>
+<circle cx="702.7" cy="123.4" r="2.6" fill="#2f81f7"/>
+<circle cx="830.0" cy="99.6" r="5" fill="#2f81f7" stroke="#0d1117" stroke-width="2"/>
 <line x1="66" y1="276.0" x2="830" y2="276.0" stroke="#30363d" stroke-width="1"/>
 <text x="66.0" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-24</text>
-<text x="218.8" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-25</text>
-<text x="371.6" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-26</text>
-<text x="524.4" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-27</text>
-<text x="677.2" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-28</text>
-<text x="830.0" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-29</text>
+<text x="193.3" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-25</text>
+<text x="320.7" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-26</text>
+<text x="448.0" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-27</text>
+<text x="575.3" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-28</text>
+<text x="702.7" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-29</text>
+<text x="830.0" y="298" fill="#8b949e" font-size="11" text-anchor="middle">10-30</text>
 <text x="66" y="28" fill="#8b949e" font-size="13">Total release downloads<tspan dx="10" font-size="11" opacity="0.75">· since 2026-10-24</tspan></text>
-<text x="830" y="34" fill="#e6edf3" font-size="26" font-weight="600" text-anchor="end">224</text>
+<text x="830" y="34" fill="#e6edf3" font-size="26" font-weight="600" text-anchor="end">259</text>
 </g></svg>
