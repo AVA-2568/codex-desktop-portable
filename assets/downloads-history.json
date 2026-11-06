@@ -29,18 +29,24 @@
       "published_at": "2026-10-28T07:59:13Z",
       "downloads": 80,
       "last_seen": "2026-11-05",
-      "retired": false
+      "retired": true
     },
     "v26.1027.30824": {
       "published_at": "2026-10-30T08:09:42Z",
       "downloads": 135,
-      "last_seen": "2026-11-05",
+      "last_seen": "2026-11-06",
       "retired": false
     },
     "v26.1029.61003": {
       "published_at": "2026-11-04T08:42:15Z",
-      "downloads": 80,
-      "last_seen": "2026-11-05",
+      "downloads": 121,
+      "last_seen": "2026-11-06",
+      "retired": false
+    },
+    "v26.1103.31037": {
+      "published_at": "2026-11-06T09:00:07Z",
+      "downloads": 2,
+      "last_seen": "2026-11-06",
       "retired": false
     }
   },
@@ -174,9 +180,19 @@
         "v26.1027.30824": 135,
         "v26.1029.61003": 80
       }
+    },
+    {
+      "date": "2026-11-06",
+      "total": 517,
+      "delta": 43,
+      "by_tag": {
+        "v26.1027.30824": 135,
+        "v26.1029.61003": 121,
+        "v26.1103.31037": 2
+      }
     }
   ],
   "repo": "AVA-2568/codex-desktop-portable",
-  "updated_at": "2026-11-05T10:49:50Z",
+  "updated_at": "2026-11-06T10:48:54Z",
   "first_snapshot": "2026-10-24"
 }
