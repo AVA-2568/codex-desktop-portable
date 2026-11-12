@@ -11,35 +11,35 @@
 <text x="54" y="112.5" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">750</text>
 <line x1="66" y1="58.0" x2="830" y2="58.0" stroke="#eaeef2" stroke-width="1"/>
 <text x="54" y="58.0" fill="#656d76" font-size="11" text-anchor="end" dominant-baseline="middle">1k</text>
-<path d="M 66.0 276.0 L 66.0 251.6 L 108.4 249.8 L 150.9 246.8 L 193.3 243.3 L 235.8 237.2 L 278.2 227.2 L 320.7 219.5 L 363.1 215.2 L 405.6 213.0 L 448.0 206.9 L 490.4 199.5 L 532.9 184.7 L 575.3 172.7 L 617.8 163.3 L 660.2 112.3 L 702.7 108.8 L 745.1 105.7 L 787.6 100.9 L 830.0 94.4 L 830.0 276.0 Z" fill="url(#fill)" stroke="none"/>
-<path d="M 66.0 251.6 L 108.4 249.8 L 150.9 246.8 L 193.3 243.3 L 235.8 237.2 L 278.2 227.2 L 320.7 219.5 L 363.1 215.2 L 405.6 213.0 L 448.0 206.9 L 490.4 199.5 L 532.9 184.7 L 575.3 172.7 L 617.8 163.3 L 660.2 112.3 L 702.7 108.8 L 745.1 105.7 L 787.6 100.9 L 830.0 94.4" fill="none" stroke="#0969da" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 66.0 276.0 L 66.0 251.6 L 106.2 249.8 L 146.4 246.8 L 186.6 243.3 L 226.8 237.2 L 267.1 227.2 L 307.3 219.5 L 347.5 215.2 L 387.7 213.0 L 427.9 206.9 L 468.1 199.5 L 508.3 184.7 L 548.5 172.7 L 588.7 163.3 L 628.9 112.3 L 669.2 108.8 L 709.4 105.7 L 749.6 100.9 L 789.8 94.4 L 830.0 83.9 L 830.0 276.0 Z" fill="url(#fill)" stroke="none"/>
+<path d="M 66.0 251.6 L 106.2 249.8 L 146.4 246.8 L 186.6 243.3 L 226.8 237.2 L 267.1 227.2 L 307.3 219.5 L 347.5 215.2 L 387.7 213.0 L 427.9 206.9 L 468.1 199.5 L 508.3 184.7 L 548.5 172.7 L 588.7 163.3 L 628.9 112.3 L 669.2 108.8 L 709.4 105.7 L 749.6 100.9 L 789.8 94.4 L 830.0 83.9" fill="none" stroke="#0969da" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="66.0" cy="251.6" r="2.6" fill="#0969da"/>
-<circle cx="108.4" cy="249.8" r="2.6" fill="#0969da"/>
-<circle cx="150.9" cy="246.8" r="2.6" fill="#0969da"/>
-<circle cx="193.3" cy="243.3" r="2.6" fill="#0969da"/>
-<circle cx="235.8" cy="237.2" r="2.6" fill="#0969da"/>
-<circle cx="278.2" cy="227.2" r="2.6" fill="#0969da"/>
-<circle cx="320.7" cy="219.5" r="2.6" fill="#0969da"/>
-<circle cx="363.1" cy="215.2" r="2.6" fill="#0969da"/>
-<circle cx="405.6" cy="213.0" r="2.6" fill="#0969da"/>
-<circle cx="448.0" cy="206.9" r="2.6" fill="#0969da"/>
-<circle cx="490.4" cy="199.5" r="2.6" fill="#0969da"/>
-<circle cx="532.9" cy="184.7" r="2.6" fill="#0969da"/>
-<circle cx="575.3" cy="172.7" r="2.6" fill="#0969da"/>
-<circle cx="617.8" cy="163.3" r="2.6" fill="#0969da"/>
-<circle cx="660.2" cy="112.3" r="2.6" fill="#0969da"/>
-<circle cx="702.7" cy="108.8" r="2.6" fill="#0969da"/>
-<circle cx="745.1" cy="105.7" r="2.6" fill="#0969da"/>
-<circle cx="787.6" cy="100.9" r="2.6" fill="#0969da"/>
-<circle cx="830.0" cy="94.4" r="5" fill="#0969da" stroke="#ffffff" stroke-width="2"/>
+<circle cx="106.2" cy="249.8" r="2.6" fill="#0969da"/>
+<circle cx="146.4" cy="246.8" r="2.6" fill="#0969da"/>
+<circle cx="186.6" cy="243.3" r="2.6" fill="#0969da"/>
+<circle cx="226.8" cy="237.2" r="2.6" fill="#0969da"/>
+<circle cx="267.1" cy="227.2" r="2.6" fill="#0969da"/>
+<circle cx="307.3" cy="219.5" r="2.6" fill="#0969da"/>
+<circle cx="347.5" cy="215.2" r="2.6" fill="#0969da"/>
+<circle cx="387.7" cy="213.0" r="2.6" fill="#0969da"/>
+<circle cx="427.9" cy="206.9" r="2.6" fill="#0969da"/>
+<circle cx="468.1" cy="199.5" r="2.6" fill="#0969da"/>
+<circle cx="508.3" cy="184.7" r="2.6" fill="#0969da"/>
+<circle cx="548.5" cy="172.7" r="2.6" fill="#0969da"/>
+<circle cx="588.7" cy="163.3" r="2.6" fill="#0969da"/>
+<circle cx="628.9" cy="112.3" r="2.6" fill="#0969da"/>
+<circle cx="669.2" cy="108.8" r="2.6" fill="#0969da"/>
+<circle cx="709.4" cy="105.7" r="2.6" fill="#0969da"/>
+<circle cx="749.6" cy="100.9" r="2.6" fill="#0969da"/>
+<circle cx="789.8" cy="94.4" r="2.6" fill="#0969da"/>
+<circle cx="830.0" cy="83.9" r="5" fill="#0969da" stroke="#ffffff" stroke-width="2"/>
 <line x1="66" y1="276.0" x2="830" y2="276.0" stroke="#d0d7de" stroke-width="1"/>
 <text x="66.0" y="298" fill="#656d76" font-size="11" text-anchor="middle">10-24</text>
-<text x="193.3" y="298" fill="#656d76" font-size="11" text-anchor="middle">10-27</text>
-<text x="320.7" y="298" fill="#656d76" font-size="11" text-anchor="middle">10-30</text>
-<text x="448.0" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-02</text>
-<text x="575.3" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-05</text>
-<text x="702.7" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-08</text>
-<text x="830.0" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-11</text>
+<text x="226.8" y="298" fill="#656d76" font-size="11" text-anchor="middle">10-28</text>
+<text x="387.7" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-01</text>
+<text x="548.5" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-05</text>
+<text x="709.4" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-09</text>
+<text x="830.0" y="298" fill="#656d76" font-size="11" text-anchor="middle">11-12</text>
 <text x="66" y="28" fill="#656d76" font-size="13">Total release downloads<tspan dx="10" font-size="11" opacity="0.75">· since 2026-10-24</tspan></text>
-<text x="830" y="34" fill="#1f2328" font-size="26" font-weight="600" text-anchor="end">833</text>
+<text x="830" y="34" fill="#1f2328" font-size="26" font-weight="600" text-anchor="end">881</text>
 </g></svg>
